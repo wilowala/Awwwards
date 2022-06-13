@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Joan', serif;
+}
+
+body{
+    background: #f4f7f6 !important;
+}
+
+/* NAVBAR.HTML */
+nav{
+    background: #f4f7f6 !important;
+    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.7);
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#site{
+    background-color: black;
+    color: white;
+    padding: 1.5rem;
+}
