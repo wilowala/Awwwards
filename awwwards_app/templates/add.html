@@ -1,0 +1,15 @@
+{%extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+{%block content%}
+<div class="container-fluid mb-5 pb-5">
+    {%include 'nav.html' %}
+</div>
+<div class="container p-5">
+    <form action="" method='POST' class="form-control p-5" enctype="multipart/form-data">
+        {%csrf_token%}
+        {{form | crispy}}
+        <input type="submit" class='btn btn-info' value="Submit">
+    </form>
+</div>
+{%endblock%}
