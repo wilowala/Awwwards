@@ -10,7 +10,7 @@ from .serializers import PostSerializer, ProfileSerializer
 def api_overview(request):
     api_urls = {
         'Posts':'/posts/',
-        'Profile': '/profiles',
+        'Profiles': '/profiles',
     }
     return Response(api_urls)
 
