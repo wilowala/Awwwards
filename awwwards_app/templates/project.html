@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy form %}
+
+{% block content %}
+<div class="container-fluid mb-5 pb-5">
+    {%include 'nav.html' %}
+</div>
+
+<div class="container-fluid row mb-3">
+    <div class="card col-md-5">
+        <div class="">
+            <img class="card-img-top" src="{{ post.image.url }}" alt="{{photo.title}}">
+            <a href="" class="text-decoration-none text-dark">
+                <div class="">
+                    <div class="container">
+                        <div class="mb-4">
+                            <div class="d-flex flex-row" style="margin-top:20%">
+                                {% for rating in post.ratings.all %}
+                                {% if forloop.counter is post.ratings.all.count %}
+                                <small id="design">{{ rating.design_average}}<br>
+                                    <span class="rates ">design</span>
+                                </small>
+                                <small id="usable" class="mx-auto">{{ rating.usability_average }}<br>
+                                    <span class="rates">usability</span>
+                                </small>
+                                <small id="content">{{ rating.content_average }}<br>
+                                    <span class="rates">content</span>
+                                </small>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+
+        <div class="card-body">
+            {%if post.owner.profile_photo%}
+            <img src="{{post.owner.profile_photo.url}}" class="nav-img mr-2 rounded-circle border ml-3 mt-2' alt="
+                width="35" height="35" alt="">
+            {%else%}
+            <div></div>
+            {%endif%}
+            <h5 class="card-title"><strong>{{post.title|title}}</strong>
+                <a href="{{post.post_url}}" style="float:right" class="btn btn-info"> View </a>
+            </h5>
+            <hr>
+            <p>{{ post.description }}</p>
+        </div>
+
+    </div>
+
+    <div class="col-md-2"></div>
+
+    <div class="col-md-5 border border-1 p-3">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <h3 class="text-center">Rate</h3>
+                {% for rating in post.ratings.all %}
+                {% if forloop.counter is post.ratings.all.count %}
+                <a class="btn btn-outline-info mx-2 my-2">
+                    <h5>{{ rating.score }}</h5>
+                    <span class="sc">Average Score</span>
+                </a>
+                <a class="btn btn-outline-info mx-2 my-2">
+                    <h5>{{ rating.design_average }}</h5>
+                    <span class="sc">Design Average</span>
+                </a>
+                <a class="btn btn-outline-info mx-2 my-2" id="u">
+                    <h5>{{ rating.usability_average }}</h5>
+                    <span class="sc">Usability Average</span>
+                </a>
+                <a class="btn btn-outline-info mx-2 my-2" id="c">
+                    <h5>{{ rating.content_average }}</h5>
+                    <span class="sc">Content Average</span>
+                </a>
+                {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        {% if rating_status %}
+        <h5 class="pt-3">Your votes have been recorded!</h5>
+        {% else %}
+        {% if user.is_authenticated %}
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form | crispy}}
+            <button class="btn btn-outline-info">Rate</button>
+        </form>
+        {% endif %}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
