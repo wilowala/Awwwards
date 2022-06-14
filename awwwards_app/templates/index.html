@@ -2,6 +2,75 @@
 
 {% block content %}
 
-<h1>No worries... we'll figure out something, Wil!</h1>
+<div class="container-fluid">
+    {%include 'nav.html' %}
+</div>
+
+<div class="container-fluid text-light h-100 w-100 bg-dark pb-5">
+    <p class="pt-5">Site of the day {{post.created  |date:"d M Y" }}</p>
+      <div class="pt-5 mt-5 pb-5 mb-5">
+        <h4 class="text-center text-bold fs-1">{{post.title | title}}</h4>
+        <p class="text-center">By <span class="text-info">{{post.owner.user.username | capfirst }}</span></p>
+  
+  
+        <!-- SCORES -->
+        {% for rating in post.ratings.all %}
+         {% if forloop.counter is post.ratings.all.count %}
+        <div class="row text-center p-5 ">
+          <div class="col-md-2"></div>
+          <div class="col-md-2 me-2 border border-1 border-info text-light rounded-circle py-5">
+            <p>{{rating.design_average}}</p>
+            DESIGN
+          </div>
+          <div class="col-md-2  me-2  border border-1 border-info text-light rounded-circle py-5">
+            <p>{{rating.usability_average}}</p>
+            USABILITY
+          </div>
+          <div class="col-md-2  me-2  border border-1 border-info text-light rounded-circle py-5">         
+            <p>{{rating.content_average}}</p>
+            CONTENT
+          </div>
+          <div class="col-md-2  me-2  border border-1 border-info text-light rounded-circle py-5">
+            <p>{{rating.score}}</p>
+            SCORE
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        {%endif%}
+        {%endfor%}
+  
+  
+  
+      </div>
+      <div class="btn btn-outline-info rounded-pill">
+        <a class="text-decoration-none text-light" href="{{post.post_url}}">View</a></div>
+        <a class='float-end text-decoration-none text-light btn btn-outline-info rounded-pill' href="{% url 'project' post %}">Rate</a>
+  </div>
+  
+  
+  
+  <div class="container-fluid row mb-4">
+    {%for post in posts%}
+    <a href="{%url 'project' post.title%}" class="text-decoration-none text-dark col-md-3 me-3 w-25 pt-3">
+      <div class="card ">
+        <img src="{{post.image.url}}" class="w-10" alt="">
+        <div class="card-body">
+          <div class="row">
+            <p class="card-title col-md-5"><strong>{{post.title}}</strong></p>
+            <div class=" col-md-2"></div>
+            <p class="card-title col-md-5">{{post.created |date:"d M Y" }}</p>
+          </div>
+          <hr>
+          {%if post.owner.profile_photo%}
+          <img src="{{post.owner.profile_photo.url}}" class='rounded-circle border ml-3 mt-2' alt="" width="35" height="35">
+          {%else%}
+          <div></div>
+          {%endif%}
+          <small class="pt-2">By {{post.owner.user.username}}</small>
+        </div>
+      </div>
+    </a>
+    {%endfor%}
+  </div>
     
 {% endblock %}
