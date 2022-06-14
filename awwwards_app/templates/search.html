@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid mb-5 pb-5">
+    {% include 'nav.html' %}
+</div>
+
+<div class="container-fluid ">
+    {% if posts %}
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            {% for post in posts %}
+            <div class="card mb-3 mt-5">
+                <div class="card-header bg">
+                    {% if post.owner.profile_photo %}
+                    <img src="{{post.owner.profile_photo.url}}" class='rounded-circle border ml-3 mt-2' alt="" width="35" height="35">
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                    <div class="float-end"><a class='text-decoration-none text-dark' href="{%url 'project' post.title%}">View</a></div>
+                    <small class="text-bold">{{post.owner.user.username |lower}}</small>
+                </div>
+                <img src="{{post.image.url}}" class="main-img card-img-top" alt="Image">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    {% else %}
+    <div class="fs-3 text-center m-5 p-5">
+        Sorry we have no results for your search!
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
