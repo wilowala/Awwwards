@@ -18,7 +18,7 @@ from decouple import config,Csv
 import cloudinary
 
 
-MODE=config("MODE", default="dev")
+MODE=config("MODE", default="prod")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY')
