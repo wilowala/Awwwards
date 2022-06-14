@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     'awwwards_app',
     'cloudinary',
     'myapi',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
