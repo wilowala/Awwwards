@@ -172,7 +172,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 cloudinary.config( 
-    cloud_name = config('CLOUD_NAME'),
-    api_key = config('API_KEY'),
-    api_secret = config('API_SECRET'),
+    cloud_name ='dxxymyyil',
+    api_key ='419211862356548' ,
+    api_secret ='1OkCye2asz35dqP5bOQbFIZGiYs',
 )
