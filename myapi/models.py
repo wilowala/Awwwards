@@ -1,6 +1,7 @@
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+import datetime
 
 # Create your models here.
 class Post(models.Model):
@@ -23,7 +24,7 @@ class Profile(models.Model):
     profile_photo = CloudinaryField("image", blank= True)
     bio = models.TextField(blank=True)
     projects = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(default=datetime.datetime.now)
 
     def __str__(self):
         return self.user.username
